@@ -131,7 +131,9 @@ app.get('/', (req, res) => {
     res.redirect('/dashboard/');
 });
 
-
+app.get('/favicon.ico', (req, res) => {
+    res.status(204).end();
+});
 
 app.use((req, res, next) => {
     next(new AppError('A rota solicitada não foi encontrada neste servidor.', 404));
