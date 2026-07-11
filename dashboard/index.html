@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPED — Painel do Observador</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="rune">⟁</div>
+    <h1>PAINEL DO OBSERVADOR</h1>
+    <p>RPED · Sistema de Rolagem · Status do Jogador</p>
+</header>
+
+<div id="loadingMsg" style="text-align:center;margin-top:40px;color:var(--muted);font-size:0.85rem;letter-spacing:0.1em;">
+    <span class="spinner"></span> Carregando registros do grimório...
+</div>
+
+<div class="controls" id="searchControls" style="display:none;">
+    <input
+        type="text"
+        id="guildIdInput"
+        placeholder="Digite o ID da Guilda (apenas números)..."
+        onkeydown="if(event.key === 'Enter') buscarGuilda()"
+    >
+    <button onclick="buscarGuilda()">Buscar Guilda</button>
+    <button class="secondary" onclick="carregarTodosUsuarios()">Visão Global</button>
+</div>
+
+<div class="table-container" id="usersTableContainer" style="display:none;">
+    <table class="users-table">
+        <thead>
+            <tr id="tableHeaders">
+                <th>ID do Usuário</th>
+                <th>Permissão</th>
+                <th>Comandos</th>
+                <th>Sorte Global</th>
+                <th>Data de Entrada</th>
+            </tr>
+        </thead>
+        <tbody id="usersTableBody"></tbody>
+    </table>
+</div>
+
+<!-- Container de paginação — visível apenas na listagem global -->
+<div id="paginationControls" class="pagination" style="display:none;"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

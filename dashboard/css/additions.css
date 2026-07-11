@@ -1,0 +1,78 @@
+/* Adicione estes blocos ao final do seu style.css existente */
+
+/* ── Botão pequeno para células de tabela ────────────────────────────────────
+   Substitui o uso incorreto de .controls.button.secondary em <a> tags.      */
+.btn-small {
+    display: inline-block;
+    padding: 5px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+.btn-small:hover {
+    background: #1e1e30;
+    border-color: var(--accent);
+}
+
+/* ── Estado ativo do botão de guilda ─────────────────────────────────────────
+   Indica visualmente qual guilda está selecionada na tela de detalhes.       */
+.guild-button.active {
+    border-color: var(--accent);
+    background: rgba(124, 92, 252, 0.1);
+    box-shadow: 0 0 12px rgba(124, 92, 252, 0.2);
+}
+.guild-button.active .guild-name {
+    color: var(--accent2);
+}
+
+/* ── Controles de paginação ──────────────────────────────────────────────────
+   Aparece abaixo da tabela na listagem global de usuários.                   */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 16px;
+}
+.pagination button {
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+.pagination button:hover:not(:disabled) {
+    background: #1e1e30;
+    border-color: var(--accent);
+}
+.pagination button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* ── Subtítulo de seção na tela de usuário ───────────────────────────────────
+   O h3 dentro de #guild-selection e dos containers de métricas.              */
+#guild-selection > h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-family: var(--mono);
+    font-weight: 400;
+}

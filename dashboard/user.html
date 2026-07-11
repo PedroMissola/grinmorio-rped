@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPED — Detalhes do Jogador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/dashboard/css/style.css">
+    <link rel="stylesheet" href="/dashboard/css/additions.css">
+</head>
+<body>
+
+<header>
+    <div class="rune">⟁</div>
+    <h1 id="main-title">PAINEL DO OBSERVADOR</h1>
+    <p>RPED · Detalhes do Jogador</p>
+</header>
+
+<div id="loadingMsg" style="text-align:center;margin-top:40px;color:var(--muted);font-size:0.85rem;letter-spacing:0.1em;">
+    <span class="spinner"></span> Carregando informações do jogador...
+</div>
+
+<div id="rped-metrics" class="table-container" style="display:none;margin-bottom:20px;">
+    <!-- Métricas globais do usuário — preenchido via user.js -->
+</div>
+
+<div id="guild-selection" style="display:none;width:100%;max-width:900px;">
+    <h3>Selecione uma Guilda</h3>
+    <div id="guild-buttons" class="guild-buttons-container"></div>
+</div>
+
+<div id="guild-metrics" class="table-container" style="display:none;margin-top:20px;">
+    <!-- Métricas da guilda selecionada — preenchido via user.js -->
+</div>
+
+<div style="margin-top:20px;text-align:center;">
+    <a href="/dashboard" class="btn-small">← Voltar à Lista</a>
+</div>
+
+<script src="/dashboard/js/user.js"></script>
+</body>
+</html>

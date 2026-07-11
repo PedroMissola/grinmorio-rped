@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPED — Acesso Restrito</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #11111a;
+            --border: #1e1e30;
+            --accent: #7c5cfc;
+            --accent2: #c084fc;
+            --text: #c8c8e0;
+            --muted: #555570;
+            --red: #f04060;
+            --mono: 'Share Tech Mono', monospace;
+            --serif: 'Cinzel', serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--mono);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background-image:
+                radial-gradient(ellipse 60% 40% at 50% 0%, #1a0a3a 0%, transparent 70%),
+                repeating-linear-gradient(0deg, transparent, transparent 39px, #ffffff04 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, #ffffff03 40px);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .rune {
+            display: inline-block;
+            font-size: 2rem;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 12px #7c5cfc);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 12px #7c5cfc);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 24px #c084fc);
+            }
+        }
+
+        header h1 {
+            font-family: var(--serif);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #fff;
+            text-shadow: 0 0 30px #7c5cfc88;
+        }
+
+        header p {
+            margin-top: 6px;
+            font-size: 0.7rem;
+            color: var(--muted);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 380px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 36px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+        }
+
+        .login-card label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            background: #0d0d18;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 0.9rem;
+            padding: 12px 44px 12px 16px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.1em;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.12);
+        }
+
+        .input-wrapper input.error {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(240, 64, 96, 0.12);
+            animation: shake 0.35s ease;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-6px);
+            }
+
+            75% {
+                transform: translateX(6px);
+            }
+        }
+
+        .toggle-visibility {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .toggle-visibility:hover {
+            color: var(--text);
+        }
+
+        .error-msg {
+            font-size: 0.72rem;
+            color: var(--red);
+            letter-spacing: 0.05em;
+            min-height: 18px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 13px;
+            background: var(--accent);
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            font-family: var(--serif);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, opacity 0.2s;
+        }
+
+        .btn-login:hover:not(:disabled) {
+            background: var(--accent2);
+            box-shadow: 0 0 20px #c084fc44;
+        }
+
+        .btn-login:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid transparent;
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="rune">⟁</div>
+        <h1>ACESSO RESTRITO</h1>
+        <p>RPED · Painel do Observador</p>
+    </header>
+
+    <div class="login-card">
+        <label for="tokenInput">Token de Acesso</label>
+        <div class="input-wrapper">
+            <input type="password" id="tokenInput" placeholder="••••••••••••••••" autocomplete="current-password"
+                onkeydown="if(event.key==='Enter') entrar()">
+            <button class="toggle-visibility" onclick="toggleVisibility()" title="Mostrar/ocultar">👁</button>
+        </div>
+        <span class="error-msg" id="errorMsg"></span>
+        <button class="btn-login" id="btnLogin" onclick="entrar()">ENTRAR</button>
+    </div>
+
+    <script>
+        (async function checkExistingSession() {
+            const token = sessionStorage.getItem('dashboardToken')
+           || localStorage.getItem('dashboardToken');
+            if (!token) return;
+            try {
+                const res = await fetch('/dashboard/api/users?page=1', {
+                    headers: { 'x-dashboard-token': token }
+                });
+                if (res.ok) window.location.replace('/dashboard');
+            } catch (_) { }
+        })();
+
+        function toggleVisibility() {
+            const input = document.getElementById('tokenInput');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        async function entrar() {
+            const input = document.getElementById('tokenInput');
+            const btn = document.getElementById('btnLogin');
+            const errorEl = document.getElementById('errorMsg');
+            const token = input.value.trim();
+
+            errorEl.textContent = '';
+            input.classList.remove('error');
+
+            if (!token) {
+                input.classList.add('error');
+                errorEl.textContent = 'Digite o token de acesso.';
+                input.focus();
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Verificando...';
+
+            try {
+                const res = await fetch('/dashboard/api/users?page=1', {
+                    headers: { 'x-dashboard-token': token }
+                });
+
+                if (res.ok) {
+                    sessionStorage.setItem('dashboardToken', token);
+                    localStorage.setItem('dashboardToken', token);
+                    window.location.replace('/dashboard');
+                } else {
+                    input.classList.add('error');
+                    errorEl.textContent = 'Token inválido. Verifique e tente novamente.';
+                    input.value = '';
+                    input.focus();
+                }
+            } catch (_) {
+                errorEl.textContent = 'Não foi possível conectar ao servidor.';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'ENTRAR';
+            }
+        }
+    </script>
+</body>
+
+</html>

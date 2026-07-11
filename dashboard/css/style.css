@@ -1,0 +1,200 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg:        #0a0a0f;
+    --surface:   #11111a;
+    --border:    #1e1e30;
+    --accent:    #7c5cfc;
+    --accent2:   #c084fc;
+    --gold:      #f0c040;
+    --red:       #f04060;
+    --green:     #40c080;
+    --text:      #c8c8e0;
+    --muted:     #555570;
+    --mono:      'Share Tech Mono', monospace;
+    --serif:     'Cinzel', serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 16px 80px;
+    background-image:
+        radial-gradient(ellipse 60% 40% at 50% 0%, #1a0a3a 0%, transparent 70%),
+        repeating-linear-gradient(0deg, transparent, transparent 39px, #ffffff04 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, #ffffff03 40px);
+}
+
+/* ── Header ── */
+header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+header h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #fff;
+    text-shadow: 0 0 30px #7c5cfc88;
+}
+header p {
+    margin-top: 6px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+.rune {
+    display: inline-block;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 12px #7c5cfc);
+}
+
+/* ── Status Badges ── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+}
+.badge.on  { background: #40c08022; color: var(--green); border: 1px solid #40c08044; }
+.badge.neutral { background: #7c5cfc22; color: var(--accent2); border: 1px solid #7c5cfc44; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+/* ── Controls ── */
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 900px;
+}
+.controls input {
+    flex: 1;
+    background: #0d0d18;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    padding: 10px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.controls input:focus { border-color: var(--accent); }
+.controls button {
+    padding: 0 20px;
+    background: var(--accent);
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.controls button:hover { background: var(--accent2); box-shadow: 0 0 15px #c084fc55; }
+.controls button.secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+.controls button.secondary:hover { background: #1e1e30; box-shadow: none; }
+
+/* ── Tabela ── */
+.table-container {
+    width: 100%;
+    max-width: 900px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+.users-table th, .users-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+}
+.users-table th {
+    background: #0d0d18;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.users-table tr:hover {
+    background: rgba(124, 92, 252, 0.05);
+}
+.users-table td {
+    font-size: 0.85rem;
+    color: var(--text);
+}
+.users-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Spinner */
+.spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid transparent;
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Guild Buttons */
+.guild-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.guild-button {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.guild-button:hover {
+    background: #1e1e30;
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.guild-button .guild-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.guild-button .guild-id {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+}
