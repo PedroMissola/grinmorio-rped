@@ -78,12 +78,15 @@ async function carregarUsuarios(page = 1) {
             const tr = document.createElement('tr');
             const permissao = user.permissaoBot || 'normal';
             const isEspecial = permissao === 'mestre' || permissao === 'admin';
+
             const permBadge = isEspecial
                 ? `<span class="badge on"><span class="dot"></span>${permissao.toUpperCase()}</span>`
                 : `<span class="badge neutral"><span class="dot"></span>NORMAL</span>`;
+
             const date = user.createdAt
                 ? new Date(user.createdAt).toLocaleDateString('pt-BR', { year: 'numeric', month: 'short', day: 'numeric' })
                 : 'Desconhecido';
+
             const sorte = user.mediaSorteGlobal !== undefined ? user.mediaSorteGlobal.toFixed(3) : 'N/A';
             const comandos = user.comandosUsados !== undefined ? user.comandosUsados : 0;
 
@@ -108,21 +111,26 @@ async function carregarUsuarios(page = 1) {
     }
 }
 
-function carregarTodosUsuarios() { carregarUsuarios(1); }
+function carregarTodosUsuarios() {
+    carregarUsuarios(1);
+}
 
 function renderPagination() {
     const pagination = document.getElementById('paginationControls');
-    if (state.totalPages <= 1) { pagination.style.display = 'none'; return; }
+    if (state.totalPages <= 1) {
+        pagination.style.display = 'none';
+        return;
+    }
 
     pagination.style.display = 'flex';
     pagination.innerHTML = `
         <button class="secondary" onclick="carregarUsuarios(${state.currentPage - 1})"
-            ${state.currentPage <= 1 ? 'disabled' : ''}>← Anterior</button>
+            ${state.currentPage <= 1 ? 'disabled' : ''}>« Anterior</button>
         <span style="color:var(--muted);font-size:0.8rem;align-self:center;">
             Página ${state.currentPage} de ${state.totalPages}
         </span>
         <button class="secondary" onclick="carregarUsuarios(${state.currentPage + 1})"
-            ${state.currentPage >= state.totalPages ? 'disabled' : ''}>Próxima →</button>
+            ${state.currentPage >= state.totalPages ? 'disabled' : ''}>Próxima »</button>
     `;
 }
 
@@ -178,6 +186,7 @@ async function buscarGuilda() {
         result.data.forEach(user => {
             const tr = document.createElement('tr');
             const sorte = user.mediaSorte !== undefined ? user.mediaSorte.toFixed(3) : 'N/A';
+
             tr.innerHTML = `
                 <td style="font-family:var(--mono);">${user.userId}</td>
                 <td>${user.dadosRolados || 0}</td>
